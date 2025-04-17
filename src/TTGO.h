@@ -71,12 +71,17 @@ typedef FocalTech_Class CapacitiveTouch ;
 #endif
 
 #ifdef LILYGO_WATCH_LVGL
-#include "lvgl/lvgl.h"
+// #include "lvgl/lvgl.h"
+#include <lvgl.h>
 #endif
 
 #ifdef LILYGO_WATCH_LVGL_FS
 // Removed as it is now merged in LVGL directly, see https://docs.lvgl.io/master/libs/fs.html
 // #include "libraries/lv_fs_if/lv_fs_if.h"
+#endif
+#ifdef LILYGO_WATCH_LVGL_DECODER
+// Removed as it is now merged in LVGL directly
+// #include "libraries/lv_lib_png/lv_png.h"
 #endif
 
 #ifdef LILYGO_WATCH_HAS_AXP202
@@ -120,6 +125,12 @@ typedef FocalTech_Class CapacitiveTouch ;
 #if defined(LILYGO_WATCH_DRV2605)
 #include "libraries/Adafruit_DRV2605_Library/Adafruit_DRV2605.h"
 #endif
+
+
+#if !defined(EXTERNAL_TFT_ESPI_LIBRARY) && !defined(LILYGO_BLOCK_ILI9488_MODULE) && !defined(TWATCH_USE_PSRAM_ALLOC_LVGL)
+// #define ENABLE_LVGL_FLUSH_DMA       //Use DMA for transmission by default
+#endif
+
 
 #ifndef LVGL_BUFFER_SIZE
 #if defined(LILYGO_BLOCK_ST7796S_MODULE)  || defined(LILYGO_BLOCK_ILI9488_MODULE) || defined(LILYGO_BLOCK_ILI9481_MODULE)
@@ -740,9 +751,10 @@ public:
             return false;
         }
         lv_init();
-        lv_indev_drv_t indev_drv;
+        static lv_indev_drv_t indev_drv;
         lv_disp_drv_init(&disp_drv);
-        static lv_disp_buf_t disp_buf;
+        // static lv_disp_buf_t disp_buf;
+        static lv_disp_draw_buf_t disp_buf;
 
 #ifdef  TWATCH_USE_PSRAM_ALLOC_LVGL
         if (psramFound()) {
@@ -772,9 +784,11 @@ public:
 
 
 #ifdef  TWATCH_LVGL_DOUBLE_BUFFER
-        lv_disp_buf_init(&disp_buf, buf1, buf2, LVGL_BUFFER_SIZE);
+        // lv_disp_buf_init(&disp_buf, buf1, buf2, LVGL_BUFFER_SIZE);
+        lv_disp_draw_buf_init(&disp_buf, buf1, buf2, LVGL_BUFFER_SIZE);
 #else
-        lv_disp_buf_init(&disp_buf, buf1, NULL, LVGL_BUFFER_SIZE);
+        // lv_disp_buf_init(&disp_buf, buf1, NULL, LVGL_BUFFER_SIZE);
+        lv_disp_draw_buf_init(&disp_buf, buf1, NULL, LVGL_BUFFER_SIZE);
 #endif
 
 
@@ -782,7 +796,8 @@ public:
         disp_drv.ver_res = tft->height();
         disp_drv.flush_cb = disp_flush;
         /*Set a display buffer*/
-        disp_drv.buffer = &disp_buf;
+        // disp_drv.buffer = &disp_buf;
+        disp_drv.draw_buf = &disp_buf;
         lv_disp_drv_register(&disp_drv);
 
 #if  defined(LILYGO_WATCH_HAS_TOUCH)
@@ -1545,7 +1560,8 @@ public: /*Compatible with MY-TTGO-TWATCH https://github.com/sharandac/My-TTGO-Wa
 #endif
 private:
 #if  defined(LILYGO_WATCH_LVGL) && defined(LILYGO_WATCH_HAS_DISPLAY)
-    lv_disp_drv_t disp_drv;
+    // lv_disp_drv_t disp_drv;
+    static lv_disp_drv_t disp_drv;
 #endif
 
 #ifdef LILYGO_WATCH_HAS_ADC
@@ -1572,7 +1588,8 @@ protected:
     }
 
 #if defined(LILYGO_WATCH_LVGL) && defined(LILYGO_WATCH_HAS_TOUCH)
-    static bool touchpad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
+    // static bool touchpad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
+    static void touchpad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
     {
 
 #if (defined(LILYGO_WATCH_2020_V1) || defined(LILYGO_WATCH_2020_V2) || defined(LILYGO_WATCH_2020_V3)|| defined(LILYGO_WATCH_2019_WITH_TOUCH)) &&  defined(LILYGO_WATCH_LVGL)
@@ -1594,7 +1611,7 @@ protected:
         data->state = _ttgo->getTouch(data->point.x, data->point.y) ?  LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
 #endif /*LILYGO_WATCH_2020_V1 & LILYGO_WATCH_2020_V2*/
 
-        return false; /*Return false because no moare to be read*/
+        // return false; /*Return false because no moare to be read*/
     }
 
 #endif /*LILYGO_WATCH_LVGL , LILYGO_WATCH_HAS_TOUCH*/
