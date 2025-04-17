@@ -88,10 +88,6 @@ typedef FocalTech_Class CapacitiveTouch ;
 #include "libraries/lv_fs_if/lv_fs_if.h"
 #endif
 
-#ifdef LILYGO_WATCH_LVGL_DECODER
-#include "libraries/lv_lib_png/lv_png.h"
-#endif
-
 #ifdef LILYGO_WATCH_HAS_AXP202
 #include "drive/axp/axp20x.h"
 #endif
