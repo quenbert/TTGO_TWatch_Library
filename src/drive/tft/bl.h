@@ -15,19 +15,18 @@ public:
 
     virtual ~PWMBase()
     {
-        ledcDetachPin(_pin);
+        ledcDetach(_pin);
     };
 
     virtual void begin()
     {
-        ledcSetup(_channel, 1000, 8);
-        ledcAttachPin(_pin, _channel);
-        ledcWrite(_channel, 0);
+	ledcAttachChannel(_pin, 1000, 8, _channel);
+        ledcWriteChannel(_channel, 0);
     };
 
     virtual void adjust(uint8_t level)
     {
-        ledcWrite(_channel, level);
+        ledcWriteChannel(_channel, level);
     };
 
 protected:
@@ -60,13 +59,13 @@ public:
     void on()
     {
         _on = true;
-        ledcWrite(_channel, _level);
+        ledcWriteChannel(_channel, _level);
     };
 
     void off()
     {
         _on = false;
-        ledcWrite(_channel, 0);
+        ledcWriteChannel(_channel, 0);
     };
 
     bool reverse()
@@ -105,10 +104,10 @@ public:
 
     virtual void onec(int duration = 200)
     {
-        ledcWriteTone(_channel, _freq);
-        _tick->once_ms<uint8_t>(duration, [](uint8_t channel) {
-            ledcWriteTone(channel, 0);
-        }, _channel);
+        ledcWriteTone(_pin, _freq);
+        _tick->once_ms<uint8_t>(duration, [](uint8_t pin) {
+            ledcWriteTone(pin, 0);
+        }, _pin);
     };
 
 protected:
