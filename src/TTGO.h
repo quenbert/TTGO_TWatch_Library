@@ -769,7 +769,7 @@ public:
 #endif  /*TWATCH_LVGL_DOUBLE_BUFFER*/
 #else
         static lv_color_t buf1[LVGL_BUFFER_SIZE];
-#endif  /*TWATCH_LVGL_DOUBLE_BUFFER*/
+#endif  /*TWATCH_USE_PSRAM_ALLOC_LVGL*/
 
 
 #ifdef  TWATCH_LVGL_DOUBLE_BUFFER
