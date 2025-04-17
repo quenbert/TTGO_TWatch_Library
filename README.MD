@@ -1,7 +1,7 @@
 <h1 align = "center">🌟LilyGO T-Watch🌟</h1>
 
-**English | [中文](docs/details_cn.md)**
-
+Updated/Forked TWatch Library to be compatible with latest Arduino ESP32 v3.x.x board core.
+Original code is (here)[https://github.com/Xinyuan-LilyGO/TTGO_TWatch_Library].
 
 <h2 align = "left">⭐ News </h2>
 
@@ -63,9 +63,6 @@
     + [Instructions for Debian/Ubuntu Linux](docs/arduino-ide/debian_ubuntu.md)
     + [Instructions for Fedora](docs/arduino-ide/fedora.md)
     + [Instructions for openSUSE](docs/arduino-ide/opensuse.md)
-- Please note that this library currently only supports **esp core 3.0** and below. It is recommended to use **esp core 2.0.14**
-  ![](./images/arduino.jpg)
-
 
 <h2 align = "left">🔷 FAQ</h2>
 
