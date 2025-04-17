@@ -76,7 +76,8 @@ typedef FocalTech_Class CapacitiveTouch ;
 #endif
 
 #ifdef LILYGO_WATCH_LVGL_FS
-#include "libraries/lv_fs_if/lv_fs_if.h"
+// Removed as it is now merged in LVGL directly, see https://docs.lvgl.io/master/libs/fs.html
+// #include "libraries/lv_fs_if/lv_fs_if.h"
 #endif
 
 #ifdef LILYGO_WATCH_HAS_AXP202
