@@ -1,7 +1,7 @@
 <h1 align = "center">🌟LilyGO T-Watch🌟</h1>
 
 Updated/Forked TWatch Library to be compatible with latest Arduino ESP32 v3.x.x board core.
-Original code is (here)[https://github.com/Xinyuan-LilyGO/TTGO_TWatch_Library].
+Original code is [here](https://github.com/Xinyuan-LilyGO/TTGO_TWatch_Library).
 
 <h2 align = "left">⭐ News </h2>
 
