@@ -41,16 +41,6 @@ typedef FocalTech_Class CapacitiveTouch ;
 #endif
 #endif  /*LILYGO_WATCH_HAS_TOUCH*/
 
-/*
-#if !defined(EXTERNAL_TFT_ESPI_LIBRARY)
-#if defined(LILYGO_WATCH_HAS_DISPLAY)   || defined(LILYGO_EINK_TOUCHSCREEN) || defined(LILYGO_WATCH_HAS_EINK)
-#include "libraries/TFT_eSPI/TFT_eSPI.h"
-#include "libraries/U8g2_for_Adafruit_GFX/src/U8g2_for_Adafruit_GFX.h"
-#endif
-#else   //EXTERNAL_TFT_ESPI_LIBRARY
-#include <TFT_eSPI.h>
-#endif  //EXTERNAL_TFT_ESPI_LIBRARY
-*/
 #include <TFT_eSPI.h>
 
 #ifdef LILYGO_WATCH_HAS_BMA423
@@ -129,13 +119,6 @@ typedef FocalTech_Class CapacitiveTouch ;
 #if defined(LILYGO_WATCH_DRV2605)
 #include "libraries/Adafruit_DRV2605_Library/Adafruit_DRV2605.h"
 #endif
-
-
-#if !defined(EXTERNAL_TFT_ESPI_LIBRARY) && !defined(LILYGO_BLOCK_ILI9488_MODULE) && !defined(TWATCH_USE_PSRAM_ALLOC_LVGL)
-// #define ENABLE_LVGL_FLUSH_DMA       //Use DMA for transmission by default
-#endif
-
-
 
 #ifndef LVGL_BUFFER_SIZE
 #if defined(LILYGO_BLOCK_ST7796S_MODULE)  || defined(LILYGO_BLOCK_ILI9488_MODULE) || defined(LILYGO_BLOCK_ILI9481_MODULE)
