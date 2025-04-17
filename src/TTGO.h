@@ -71,7 +71,8 @@ typedef FocalTech_Class CapacitiveTouch ;
 #endif
 
 #ifdef LILYGO_WATCH_LVGL
-#include "lvgl/lvgl.h"
+// #include "lvgl/lvgl.h"
+#include <lvgl.h> // Use LVGL from Arduino IDE, not local copy
 #endif
 
 #ifdef LILYGO_WATCH_LVGL_FS
